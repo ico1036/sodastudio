@@ -14,7 +14,7 @@ const { title } = Astro.props;
 		<meta charset="UTF-8" />
 		<meta name="description" content="SODA STUDIO - 당신만의 블루, 석촌동 소다 스튜디오" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}/favicon.svg`} />
+		<link rel="icon" type="image/svg+xml" href="/sodastudio/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
@@ -23,19 +23,19 @@ const { title } = Astro.props;
             <div class="header-left">
                 <nav class="main-nav">
                     <ul>
-                        <li><a href={import.meta.env.BASE_URL + '/'} class={Astro.url.pathname === import.meta.env.BASE_URL + '/' ? 'active' : ''}>홈</a></li>
-                        <li><a href={import.meta.env.BASE_URL + '/zone'} class={Astro.url.pathname === import.meta.env.BASE_URL + '/zone' ? 'active' : ''}>Zone 소개</a></li>
-                        <li><a href={import.meta.env.BASE_URL + '/booking'} class={Astro.url.pathname === import.meta.env.BASE_URL + '/booking' ? 'active' : ''}>예약하기</a></li>
-                        <li><a href={import.meta.env.BASE_URL + '/schedule'} class={Astro.url.pathname === import.meta.env.BASE_URL + '/schedule' ? 'active' : ''}>스케쥴</a></li>
-                        <li><a href={import.meta.env.BASE_URL + '/notices'} class={Astro.url.pathname.startsWith(import.meta.env.BASE_URL + '/notices') ? 'active' : ''}>안내사항</a></li>
-                        <li><a href={import.meta.env.BASE_URL + '/location'} class={Astro.url.pathname === import.meta.env.BASE_URL + '/location' ? 'active' : ''}>오시는길</a></li>
-                        <li><a href={import.meta.env.BASE_URL + '/rentals'} class={Astro.url.pathname.startsWith(import.meta.env.BASE_URL + '/rentals') ? 'active' : ''}>대여목록</a></li>
+                        <li><a href="/sodastudio/" class={Astro.url.pathname === '/sodastudio/' ? 'active' : ''}>홈</a></li>
+                        <li><a href="/sodastudio/zone" class={Astro.url.pathname === '/sodastudio/zone' ? 'active' : ''}>Zone 소개</a></li>
+                        <li><a href="/sodastudio/booking" class={Astro.url.pathname === '/sodastudio/booking' ? 'active' : ''}>예약하기</a></li>
+                        <li><a href="/sodastudio/schedule" class={Astro.url.pathname === '/sodastudio/schedule' ? 'active' : ''}>스케쥴</a></li>
+                        <li><a href="/sodastudio/notices" class={Astro.url.pathname.startsWith('/sodastudio/notices') ? 'active' : ''}>안내사항</a></li>
+                        <li><a href="/sodastudio/location" class={Astro.url.pathname === '/sodastudio/location' ? 'active' : ''}>오시는길</a></li>
+                        <li><a href="/sodastudio/rentals" class={Astro.url.pathname.startsWith('/sodastudio/rentals') ? 'active' : ''}>대여목록</a></li>
                     </ul>
                 </nav>
             </div>
             <div class="header-right">
-                <a href={import.meta.env.BASE_URL + '/all'}>전체보기</a>
-                <a href={import.meta.env.BASE_URL + '/login'}>로그인</a>
+                <a href="/sodastudio/all">전체보기</a>
+                <a href="/sodastudio/login">로그인</a>
             </div>
         </header>
         <main>
