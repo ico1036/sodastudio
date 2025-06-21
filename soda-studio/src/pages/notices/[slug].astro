@@ -1,6 +1,6 @@
 ---
-import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
   const notices = await getCollection('notices');
@@ -16,30 +16,22 @@ const { Content } = await notice.render();
 <Layout title={notice.data.title}>
 	<div class="container page-title">
 		<h2>{notice.data.title}</h2>
+		<p class="post-meta">작성자: {notice.data.author} | 작성일: {notice.data.pubDate.toLocaleDateString()}</p>
 	</div>
-	<div class="container">
-		<div class="notice-meta">
-			<span>작성자: {notice.data.author}</span>
-			<span>작성일: {notice.data.pubDate.toLocaleDateString()}</span>
-		</div>
-		<div class="notice-content">
-			<Content />
-		</div>
+
+	<div class="container post-content">
+		<Content />
 	</div>
 </Layout>
 
 <style>
-.notice-meta {
-	padding: 15px;
-	background-color: #f9f9f9;
-	border-top: 1px solid #eee;
-	border-bottom: 1px solid #eee;
-	margin-bottom: 30px;
-	display: flex;
-	gap: 20px;
-	color: #555;
+.post-meta {
+	color: #666;
+	font-size: 0.9em;
+	margin-top: -10px;
+	margin-bottom: 20px;
 }
-.notice-content {
+.post-content {
 	line-height: 1.8;
 }
 </style> 

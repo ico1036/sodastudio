@@ -1,25 +1,24 @@
 ---
 import { getCollection } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
-import type { GetStaticPaths } from 'astro';
+import Layout from '../../../layouts/Layout.astro';
 
-export const getStaticPaths = (async () => {
+export async function getStaticPaths() {
   const rentals = await getCollection('rentals');
-  return rentals.map(entry => ({
-    params: { slug: entry.slug }, props: { entry },
+  return rentals.map(item => ({
+    params: { slug: item.slug },
+    props: { item },
   }));
-}) satisfies GetStaticPaths;
+}
 
-const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { item } = Astro.props;
+const { Content } = await item.render();
 ---
-<Layout title={entry.data.title}>
+<Layout title={item.data.title}>
 	<div class="container page-title">
-		<h2>{entry.data.title}</h2>
-		<p class="post-meta">
-			작성자: {entry.data.author} | 작성일: {entry.data.pubDate.toLocaleDateString('ko-KR')}
-		</p>
+		<h2>{item.data.title}</h2>
+		<p class="post-meta">작성자: {item.data.author} | 작성일: {item.data.pubDate.toLocaleDateString()}</p>
 	</div>
+
 	<div class="container post-content">
 		<Content />
 	</div>
@@ -28,24 +27,11 @@ const { Content } = await entry.render();
 <style>
 .post-meta {
 	color: #666;
-	font-size: 0.9rem;
+	font-size: 0.9em;
 	margin-top: -10px;
-	margin-bottom: 2rem;
-	text-align: center;
+	margin-bottom: 20px;
 }
 .post-content {
 	line-height: 1.8;
-	font-size: 1.1rem;
-}
-.post-content h3 {
-	font-size: 1.5rem;
-	margin-top: 2rem;
-	margin-bottom: 1rem;
-	padding-bottom: 0.5rem;
-	border-bottom: 1px solid #eee;
-}
-.post-content ul {
-	list-style: none;
-	padding: 0;
 }
 </style> 
