@@ -1,0 +1,64 @@
+---
+import '../styles/global.css';
+
+export interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="SODA STUDIO - 당신만의 블루, 석촌동 소다 스튜디오" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+        <header>
+            <div class="header-left">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="/" class={Astro.url.pathname === '/' ? 'active' : ''}>홈</a></li>
+                        <li><a href="/zone" class={Astro.url.pathname === '/zone' ? 'active' : ''}>Zone 소개</a></li>
+                        <li><a href="/booking" class={Astro.url.pathname === '/booking' ? 'active' : ''}>예약하기</a></li>
+                        <li><a href="/schedule" class={Astro.url.pathname === '/schedule' ? 'active' : ''}>스케쥴</a></li>
+                        <li><a href="/notices" class={Astro.url.pathname.startsWith('/notices') ? 'active' : ''}>안내사항</a></li>
+                        <li><a href="/location" class={Astro.url.pathname === '/location' ? 'active' : ''}>오시는길</a></li>
+                        <li><a href="/rentals" class={Astro.url.pathname.startsWith('/rentals') ? 'active' : ''}>대여목록</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="header-right">
+                <a href="/all">전체보기</a>
+                <a href="/login">로그인</a>
+            </div>
+        </header>
+        <main>
+            <slot />
+        </main>
+        <footer>
+            <div class="container">
+                <p>© SODA STUDIO. All rights reserved.</p>
+            </div>
+        </footer>
+	</body>
+</html>
+
+<style is:global>
+	.main-nav ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		gap: 20px;
+	}
+	.main-nav a.active {
+		border-bottom: 2px solid #333;
+		font-weight: bold;
+	}
+</style> 

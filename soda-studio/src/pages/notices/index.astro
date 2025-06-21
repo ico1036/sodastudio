@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const notices = (await getCollection('notices')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<Layout title="안내사항 - SODA STUDIO">
+	<div class="container page-title">
+		<h2>안내사항</h2>
+	</div>
+	<div class="container">
+		<div class="notice-list">
+			<div class="notice-header">
+				<div class="col-num">번호</div>
+				<div class="col-title">글제목</div>
+				<div class="col-author">글쓴이</div>
+				<div class="col-date">작성일</div>
+			</div>
+			{notices.map((notice, index) => (
+				<a href={`/notices/${notice.slug}`} class="notice-item">
+					<div class="col-num">{notices.length - index}</div>
+					<div class="col-title">
+						{notice.data.title}
+						{notice.data.isHot && <span class="hot-icon">🔥</span>}
+					</div>
+					<div class="col-author">{notice.data.author}</div>
+					<div class="col-date">{notice.data.pubDate.toLocaleDateString()}</div>
+				</a>
+			))}
+		</div>
+	</div>
+</Layout> 

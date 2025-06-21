@@ -1,0 +1,45 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const notices = await getCollection('notices');
+  return notices.map(notice => ({
+    params: { slug: notice.slug },
+    props: { notice },
+  }));
+}
+
+const { notice } = Astro.props;
+const { Content } = await notice.render();
+---
+<Layout title={notice.data.title}>
+	<div class="container page-title">
+		<h2>{notice.data.title}</h2>
+	</div>
+	<div class="container">
+		<div class="notice-meta">
+			<span>작성자: {notice.data.author}</span>
+			<span>작성일: {notice.data.pubDate.toLocaleDateString()}</span>
+		</div>
+		<div class="notice-content">
+			<Content />
+		</div>
+	</div>
+</Layout>
+
+<style>
+.notice-meta {
+	padding: 15px;
+	background-color: #f9f9f9;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+	margin-bottom: 30px;
+	display: flex;
+	gap: 20px;
+	color: #555;
+}
+.notice-content {
+	line-height: 1.8;
+}
+</style> 

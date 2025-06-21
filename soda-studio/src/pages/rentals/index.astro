@@ -1,0 +1,66 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const rentals = (await getCollection('rentals')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<Layout title="대여목록 - SODA STUDIO">
+	<div class="container page-title">
+		<h2>대여목록</h2>
+	</div>
+
+	<div class="container">
+		<table class="board-table">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>글제목</th>
+					<th>글쓴이</th>
+					<th>작성일</th>
+				</tr>
+			</thead>
+			<tbody>
+				{rentals.map((item, index) => (
+					<tr>
+						<td>{rentals.length - index}</td>
+						<td class="title"><a href={`/rentals/${item.slug}`}>{item.data.title}</a></td>
+						<td>{item.data.author}</td>
+						<td>{item.data.pubDate.toLocaleDateString('ko-KR')}</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</div>
+</Layout>
+
+<style>
+.board-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 2rem;
+	font-size: 1rem;
+}
+.board-table th, .board-table td {
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+	padding: 15px 10px;
+	text-align: center;
+}
+.board-table th {
+	background-color: #f9f9f9;
+	font-weight: bold;
+}
+.board-table td.title {
+	text-align: left;
+}
+.board-table td.title a {
+	text-decoration: none;
+	color: #333;
+}
+.board-table td.title a:hover {
+	text-decoration: underline;
+}
+</style> 

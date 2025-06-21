@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths = (async () => {
+  const rentals = await getCollection('rentals');
+  return rentals.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+<Layout title={entry.data.title}>
+	<div class="container page-title">
+		<h2>{entry.data.title}</h2>
+		<p class="post-meta">
+			작성자: {entry.data.author} | 작성일: {entry.data.pubDate.toLocaleDateString('ko-KR')}
+		</p>
+	</div>
+	<div class="container post-content">
+		<Content />
+	</div>
+</Layout>
+
+<style>
+.post-meta {
+	color: #666;
+	font-size: 0.9rem;
+	margin-top: -10px;
+	margin-bottom: 2rem;
+	text-align: center;
+}
+.post-content {
+	line-height: 1.8;
+	font-size: 1.1rem;
+}
+.post-content h3 {
+	font-size: 1.5rem;
+	margin-top: 2rem;
+	margin-bottom: 1rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid #eee;
+}
+.post-content ul {
+	list-style: none;
+	padding: 0;
+}
+</style> 
