@@ -20,7 +20,7 @@ const notices = (await getCollection('notices')).sort(
 				<div class="col-date">작성일</div>
 			</div>
 			{notices.map((notice, index) => (
-				<a href={`/notices/${notice.slug}`} class="notice-item">
+				<a href={`/sodastudio/notices/${notice.slug}`} class="notice-item">
 					<div class="col-num">{notices.length - index}</div>
 					<div class="col-title">
 						{notice.data.title}

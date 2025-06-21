@@ -26,7 +26,7 @@ const rentals = (await getCollection('rentals')).sort(
 				{rentals.map((item, index) => (
 					<tr>
 						<td>{rentals.length - index}</td>
-						<td class="title"><a href={`/rentals/${item.slug}`}>{item.data.title}</a></td>
+						<td class="title"><a href={`/sodastudio/rentals/${item.slug}`}>{item.data.title}</a></td>
 						<td>{item.data.author}</td>
 						<td>{item.data.pubDate.toLocaleDateString('ko-KR')}</td>
 					</tr>
